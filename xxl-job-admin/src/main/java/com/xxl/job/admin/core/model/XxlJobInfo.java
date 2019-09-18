@@ -4,15 +4,15 @@ import java.util.Date;
 
 /**
  * xxl-job info
+ *
  * @author xuxueli  2016-1-12 18:25:49
  */
 public class XxlJobInfo {
 	
-	private int id;
+	private int id;				// 主键ID
 	
-	private int jobGroup;		// 任务组 (执行器ID)
-	private String jobName;		// 任务名
-	private String jobCron;		// 任务执行CRON表达式 【base on quartz】
+	private int jobGroup;		// 执行器主键ID
+	private String jobCron;		// 任务执行CRON表达式
 	private String jobDesc;
 	
 	private Date addTime;
@@ -21,17 +21,24 @@ public class XxlJobInfo {
 	private String author;		// 负责人
 	private String alarmEmail;	// 报警邮件
 
-	private String executorHandler;	// 执行器，任务Handler名称
-	private String executorParam;	// 执行器，任务参数
+	private String executorRouteStrategy;	// 执行器路由策略
+	private String executorHandler;		    // 执行器，任务Handler名称
+	private String executorParam;		    // 执行器，任务参数
+	private String executorBlockStrategy;	// 阻塞处理策略
+	private int executorTimeout;     		// 任务执行超时时间，单位秒
+	private int executorFailRetryCount;		// 失败重试次数
 	
-	private int glueSwitch;		// GLUE模式开关：0-否，1-是
-	private String glueSource;	// GLUE源代码
-	private String glueRemark;	// GLUE备注
+	private String glueType;		// GLUE类型	#com.xxl.job.core.glue.GlueTypeEnum
+	private String glueSource;		// GLUE源代码
+	private String glueRemark;		// GLUE备注
+	private Date glueUpdatetime;	// GLUE更新时间
 
-	private String childJobKey;		// 子任务Key
-	
-	// copy from quartz
-	private String jobStatus;	// 任务状态 【base on quartz】
+	private String childJobId;		// 子任务ID，多个逗号分隔
+
+	private int triggerStatus;		// 调度状态：0-停止，1-运行
+	private long triggerLastTime;	// 上次调度时间
+	private long triggerNextTime;	// 下次调度时间
+
 
 	public int getId() {
 		return id;
@@ -47,14 +54,6 @@ public class XxlJobInfo {
 
 	public void setJobGroup(int jobGroup) {
 		this.jobGroup = jobGroup;
-	}
-
-	public String getJobName() {
-		return jobName;
-	}
-
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
 	}
 
 	public String getJobCron() {
@@ -105,6 +104,14 @@ public class XxlJobInfo {
 		this.alarmEmail = alarmEmail;
 	}
 
+	public String getExecutorRouteStrategy() {
+		return executorRouteStrategy;
+	}
+
+	public void setExecutorRouteStrategy(String executorRouteStrategy) {
+		this.executorRouteStrategy = executorRouteStrategy;
+	}
+
 	public String getExecutorHandler() {
 		return executorHandler;
 	}
@@ -121,12 +128,36 @@ public class XxlJobInfo {
 		this.executorParam = executorParam;
 	}
 
-	public int getGlueSwitch() {
-		return glueSwitch;
+	public String getExecutorBlockStrategy() {
+		return executorBlockStrategy;
 	}
 
-	public void setGlueSwitch(int glueSwitch) {
-		this.glueSwitch = glueSwitch;
+	public void setExecutorBlockStrategy(String executorBlockStrategy) {
+		this.executorBlockStrategy = executorBlockStrategy;
+	}
+
+	public int getExecutorTimeout() {
+		return executorTimeout;
+	}
+
+	public void setExecutorTimeout(int executorTimeout) {
+		this.executorTimeout = executorTimeout;
+	}
+
+	public int getExecutorFailRetryCount() {
+		return executorFailRetryCount;
+	}
+
+	public void setExecutorFailRetryCount(int executorFailRetryCount) {
+		this.executorFailRetryCount = executorFailRetryCount;
+	}
+
+	public String getGlueType() {
+		return glueType;
+	}
+
+	public void setGlueType(String glueType) {
+		this.glueType = glueType;
 	}
 
 	public String getGlueSource() {
@@ -145,20 +176,43 @@ public class XxlJobInfo {
 		this.glueRemark = glueRemark;
 	}
 
-	public String getChildJobKey() {
-		return childJobKey;
+	public Date getGlueUpdatetime() {
+		return glueUpdatetime;
 	}
 
-	public void setChildJobKey(String childJobKey) {
-		this.childJobKey = childJobKey;
+	public void setGlueUpdatetime(Date glueUpdatetime) {
+		this.glueUpdatetime = glueUpdatetime;
 	}
 
-	public String getJobStatus() {
-		return jobStatus;
+	public String getChildJobId() {
+		return childJobId;
 	}
 
-	public void setJobStatus(String jobStatus) {
-		this.jobStatus = jobStatus;
+	public void setChildJobId(String childJobId) {
+		this.childJobId = childJobId;
 	}
 
+	public int getTriggerStatus() {
+		return triggerStatus;
+	}
+
+	public void setTriggerStatus(int triggerStatus) {
+		this.triggerStatus = triggerStatus;
+	}
+
+	public long getTriggerLastTime() {
+		return triggerLastTime;
+	}
+
+	public void setTriggerLastTime(long triggerLastTime) {
+		this.triggerLastTime = triggerLastTime;
+	}
+
+	public long getTriggerNextTime() {
+		return triggerNextTime;
+	}
+
+	public void setTriggerNextTime(long triggerNextTime) {
+		this.triggerNextTime = triggerNextTime;
+	}
 }
